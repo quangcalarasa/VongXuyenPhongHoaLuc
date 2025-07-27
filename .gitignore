@@ -1,0 +1,29 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+out/
+
+# ASP.NET Core
+appsettings.Development.json
+appsettings.Local.json
+
+# Node/Angular
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Others
+*.log
+*.tmp
+*.db
+*.sqlite
+
+# OS files
+Thumbs.db
+.DS_Store
