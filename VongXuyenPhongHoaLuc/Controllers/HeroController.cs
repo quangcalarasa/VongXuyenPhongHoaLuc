@@ -24,9 +24,25 @@ namespace VongXuyenPhongHoaLuc.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Hero hero)
         {
-            _context.Heroes.Add(hero);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = hero.Id }, hero);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                _context.Heroes.Add(hero);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(Get), new { id = hero.Id }, hero);
+            }
+            catch (DbUpdateException ex)
+            {
+                // Log the exception (use a logger in production)
+                return StatusCode(500, $"Database error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (use a logger in production)
+                return StatusCode(500, $"Internal error: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]
